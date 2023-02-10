@@ -4,6 +4,11 @@ x-stoplight:
 info:
   title: FashionAPI
   version: '1.0'
+  contact:
+    name: github
+    url: 'https://github.com/SeckinKurtalan/FashionAPI'
+  summary: A RESTful API project for our internship project.
+  description: A RESTful API project for our internship project.
 servers:
   - url: 'http://localhost:3000'
 paths:
@@ -32,6 +37,7 @@ paths:
                   message:
                     type: string
               examples: {}
+      parameters: []
     patch:
       summary: Update User Information
       operationId: patch-product-productId
@@ -62,12 +68,32 @@ paths:
                   price: 199.99
                   size: XXL
         description: The PATCH request body parameters are optional.
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: 'Unknown colum name : pricw'
+        '404':
+          description: Not Found
     delete:
       summary: ''
       operationId: delete-product-productId
       responses:
         '200':
           description: OK
+        '404':
+          description: Not Found
       description: Delete a product with the matching product ID.
   /product:
     post:
@@ -79,7 +105,40 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    message: 'Unknown column name : pricw'
     parameters: []
+    get:
+      summary: ''
+      operationId: get-product
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Product'
+      description: Search product with filters.
+      parameters: []
 components:
   schemas:
     Product:
