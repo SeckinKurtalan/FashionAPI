@@ -139,6 +139,46 @@ paths:
                       $ref: '#/components/schemas/Product'
       description: Search product with filters.
       parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category:
+                  type: object
+                  properties:
+                    filterType:
+                      type: string
+                    value:
+                      type: string
+                price:
+                  type: object
+                  properties:
+                    filterType:
+                      type: string
+                    value:
+                      type: string
+                size:
+                  type: object
+                  properties:
+                    FilterType:
+                      type: string
+                    value:
+                      type: string
+            examples:
+              Example 1:
+                value:
+                  category:
+                    filterType: string
+                    value: string
+                  price:
+                    filterType: string
+                    value: string
+                  size:
+                    FilterType: string
+                    value: string
+        description: ''
 components:
   schemas:
     Product:
