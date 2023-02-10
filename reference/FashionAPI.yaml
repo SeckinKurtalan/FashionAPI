@@ -1,0 +1,105 @@
+openapi: 3.1.0
+x-stoplight:
+  id: mjdz7pc9ysr5g
+info:
+  title: FashionAPI
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/product/{productId}':
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        required: true
+    get:
+      summary: Get Product Info by Product ID
+      tags: []
+      operationId: get-product-productId
+      description: Retrieve the information of the product with the matching product ID.
+      responses:
+        '200':
+          description: OK
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+              examples: {}
+    patch:
+      summary: Update User Information
+      operationId: patch-product-productId
+      description: Update the information of an existing product.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                productCode:
+                  type: string
+                category:
+                  type: string
+                price:
+                  type: number
+                  format: float
+                size:
+                  type: string
+            examples:
+              Example 1:
+                value:
+                  url: www.koton.com/123123
+                  productCode: '123123123'
+                  category: string
+                  price: 199.99
+                  size: XXL
+        description: The PATCH request body parameters are optional.
+    delete:
+      summary: ''
+      operationId: delete-product-productId
+      responses:
+        '200':
+          description: OK
+      description: Delete a product with the matching product ID.
+  /product:
+    post:
+      summary: Create New User
+      operationId: post-product
+      description: Create a new product.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+    parameters: []
+components:
+  schemas:
+    Product:
+      title: Product
+      x-stoplight:
+        id: 9nvw55qlr32d9
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+        productCode:
+          type: string
+        category:
+          type: string
+        price:
+          type: number
+          format: float
+        size:
+          type: string
+      required:
+        - id
