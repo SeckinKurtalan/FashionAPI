@@ -59,6 +59,9 @@ paths:
                   format: float
                 size:
                   type: string
+                date:
+                  type: string
+                  format: date-time
             examples:
               Example 1:
                 value:
@@ -137,6 +140,8 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Product'
+        '404':
+          description: Not Found
       description: Search product with filters.
       parameters: []
       requestBody:
@@ -148,8 +153,6 @@ paths:
                 category:
                   type: object
                   properties:
-                    filterType:
-                      type: string
                     value:
                       type: string
                 price:
@@ -157,27 +160,41 @@ paths:
                   properties:
                     filterType:
                       type: string
+                      enum:
+                        - lower
+                        - higher
+                        - between
                     value:
                       type: string
                 size:
                   type: object
                   properties:
-                    FilterType:
-                      type: string
                     value:
                       type: string
+                date:
+                  type: object
+                  properties:
+                    filterType:
+                      type: string
+                      enum:
+                        - before
+                        - after
+                    value:
+                      type: string
+                      format: date-time
             examples:
               Example 1:
                 value:
                   category:
-                    filterType: string
-                    value: string
+                    value: women
                   price:
-                    filterType: string
-                    value: string
+                    filterType: lower
+                    value: '99.90'
                   size:
-                    FilterType: string
-                    value: string
+                    value: XXL
+                  date:
+                    filterType: after
+                    value: '2019-08-24T14:15:22Z'
         description: ''
 components:
   schemas:
@@ -200,5 +217,8 @@ components:
           format: float
         size:
           type: string
+        date:
+          type: string
+          format: date-time
       required:
         - id
