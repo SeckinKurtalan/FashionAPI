@@ -15,7 +15,7 @@ paths:
   '/product/{productId}':
     parameters:
       - schema:
-          type: string
+          type: integer
         name: productId
         in: path
         required: true
@@ -29,14 +29,6 @@ paths:
           description: OK
         '404':
           description: Not Found
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-              examples: {}
       parameters: []
     patch:
       summary: Update User Information
